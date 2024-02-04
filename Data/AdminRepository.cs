@@ -13,29 +13,29 @@ namespace FribergRentalsRazor.Data
             this.applicationDbContext = applicationDbContext;
         }
 
-        public Booking Add(Booking entity)
+        public Admin Add(Admin entity)
         {
             return applicationDbContext.Admins.Add(entity).Entity;
         }
 
-        public IEnumerable<Booking> GetAll()
+        public IEnumerable<Admin> GetAll()
         {
             return applicationDbContext.Admins.ToList();
         }
 
-        public Booking Remove(Booking entity)
+        public Admin Remove(Admin entity)
         {
             var admin = applicationDbContext.Admins.Remove(entity).Entity;
             applicationDbContext.SaveChangesAsync();
             return admin;
         }
 
-        public IEnumerable<Booking> Find(Expression<Func<Booking, bool>> predicate)
+        public IEnumerable<Admin> Find(Expression<Func<Admin, bool>> predicate)
         {
             return applicationDbContext.Admins.AsQueryable().Where(predicate).ToList();
         }
 
-        public Booking GetById(int? id)
+        public Admin GetById(int? id)
         {
             return applicationDbContext.Admins.Find(id);
         }
@@ -45,9 +45,9 @@ namespace FribergRentalsRazor.Data
             applicationDbContext.SaveChanges();
         }
 
-        public Booking Update(Booking entity)
+        public Admin Update(Admin entity)
         {
-            var admin = applicationDbContext.Update<Booking>(entity).Entity;
+            var admin = applicationDbContext.Update<Admin>(entity).Entity;
             applicationDbContext.SaveChangesAsync();
             return admin;
         }

@@ -4,12 +4,12 @@ namespace FribergRentalsRazor.Models
 {
     public interface IAdmin
     {
-        Booking Add(Booking entity);
-        Booking Update(Booking entity);
-        Booking GetById(int? id);
-        Booking Remove(Booking entity);
-        IEnumerable<Booking> GetAll();
-        IEnumerable<Booking> Find(Expression<Func<Booking, bool>> predicate);
+        Admin Add(Admin entity);
+        Admin Update(Admin entity);
+        Admin GetById(int? id);
+        Admin Remove(Admin entity);
+        IEnumerable<Admin> GetAll();
+        IEnumerable<Admin> Find(Expression<Func<Admin, bool>> predicate);
         void SaveChanges();
     }
 }

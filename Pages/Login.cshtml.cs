@@ -8,12 +8,12 @@ namespace FribergRentalsRazor.Pages
 {
     public class LoginModel : PageModel
     {
-        BookingRepository adminRepository;
+        AdminRepository adminRepository;
         CustomerRepository customerRepository;
 
         [BindProperty]
-        public Models.Booking Admin { get; set; }
-        public List<Models.Booking> Admins { get; set; }
+        public Models.Admin Admin { get; set; }
+        public List<Models.Admin> Admins { get; set; }
 
         public LoginModel(ApplicationDbContext context)
         {
@@ -23,10 +23,10 @@ namespace FribergRentalsRazor.Pages
 
         public void OnGet()
         {
-            Admins = adminRepository.GetAll().ToList() ?? new List<Models.Booking>();
+            Admins = adminRepository.GetAll().ToList() ?? new List<Models.Admin>();
         }
 
-        public void OnPost(Models.Booking admin)
+        public void OnPost(Models.Admin admin)
         {
             var Admin = adminRepository.Find(a => a.Email == admin.Email && a.Password == admin.Password);
             if (Admin.Count() > 0)

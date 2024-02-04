@@ -13,14 +13,14 @@ namespace FribergRentalsRazor.Data
             : base(options)
         {
         }
-        public DbSet<Booking> Admins { get; set; } = default!;
+        public DbSet<Admin> Admins { get; set; } = default!;
         public DbSet<Car> Cars { get; set; } = default!;
         public DbSet<Customer> Customers { get; set; } = default!;
         public DbSet<Booking> Bookings { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Booking>().ToTable(nameof(Booking));
+            modelBuilder.Entity<Admin>().ToTable(nameof(Admin));
             modelBuilder.Entity<Car>().ToTable(nameof(Car));
             modelBuilder.Entity<Customer>().ToTable(nameof(Customer));
             modelBuilder.Entity<Booking>().ToTable(nameof(Booking));

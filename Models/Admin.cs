@@ -2,7 +2,7 @@
 
 namespace FribergRentalsRazor.Models
 {
-    public class Booking
+    public class Admin
     {
         public int AdminId { get; set; }
 
