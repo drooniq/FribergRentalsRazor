@@ -13,7 +13,6 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
         public Models.Customer Customer { get; set; }
         public Models.Booking Booking { get; set; }
 
-
         private readonly ICar carRepository;
         private readonly ICustomer customerRepository;
         private readonly IBooking bookingRepository;
@@ -53,6 +52,7 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
             if (Customer == null)
             {
                 ModelState.AddModelError("CustomerNotFound", "Could not find customer with email " + customerEmail);
+                return Page();
             }
 
             Booking = new Models.Booking

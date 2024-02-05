@@ -2,3 +2,43 @@
 @model FribergRentalsRazor.Pages.Customer.Booking.IndexModel
 @{
 }
+
+<h1>Listing all my Bookings</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].Car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].RentalStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Bookings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Email)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" width="100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentalStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentalReturnDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

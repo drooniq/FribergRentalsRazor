@@ -5,6 +5,7 @@ namespace FribergRentalsRazor.Models
 {
     public class Booking
     {
+        [Key]
         public int BookingId { get; set; }
         public Customer Customer { get; set; }
         public Car Car { get; set; }

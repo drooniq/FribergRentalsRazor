@@ -12,12 +12,10 @@
     <div class="form-group">
         <label asp-for="Booking.RentalStartDate" class="control-label"></label>
         <input asp-for="Booking.RentalStartDate" class="form-control" />
-        <span asp-validation-for="Booking.RentalStartDate" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Booking.RentalReturnDate" class="control-label"></label>
         <input asp-for="Booking.RentalReturnDate" class="form-control" />
-        <span asp-validation-for="Booking.RentalReturnDate" class="text-danger"></span>
     </div>
     <div class="HiddenValues">
         <input type="hidden" asp-for="Booking.Car.Id"/>

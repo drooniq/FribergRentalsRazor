@@ -24,7 +24,9 @@ namespace FribergRentalsRazor.Data
 
         public IEnumerable<Booking> GetAll()
         {
-            return applicationDbContext.Bookings.ToList();
+            return applicationDbContext.Bookings
+                .Include(c => c.Customer)
+                .Include(c => c.Car);
         }
 
         public Booking Remove(Booking entity)
