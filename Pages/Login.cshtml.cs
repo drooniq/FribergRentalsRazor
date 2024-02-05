@@ -26,14 +26,16 @@ namespace FribergRentalsRazor.Pages
             Admins = adminRepository.GetAll().ToList() ?? new List<Models.Admin>();
         }
 
-        public void OnPost(Models.Admin admin)
+        public IActionResult OnPost(Models.Admin admin)
         {
             var Admin = adminRepository.Find(a => a.Email == admin.Email && a.Password == admin.Password);
             if (Admin.Count() > 0)
             {
                 HttpContext.Session.SetString("LoggedInAdmin", Admin.ToList()[0].Email);
+                HttpContext.Session.SetInt32("AdminId", Admin.ToList()[0].AdminId);
                 HttpContext.Session.Remove("LoggedInCustomer");
-                Response.Redirect("/Admin/Index");
+                HttpContext.Session.Remove("CustomerId");
+                return RedirectToPage("/Admin/Index");
             }
             else
             {
@@ -41,12 +43,15 @@ namespace FribergRentalsRazor.Pages
                 if (Customer.Count() > 0)
                 {
                     HttpContext.Session.SetString("LoggedInCustomer", Customer.ToList()[0].Email);
+                    HttpContext.Session.SetInt32("CustomerId", Customer.ToList()[0].CustomerId);
                     HttpContext.Session.Remove("LoggedInAdmin");
-                    Response.Redirect("/Customer/Index");
+                    HttpContext.Session.Remove("AdminId");
+                    return RedirectToPage("/Customer/Index");
                 }
                 else
                 {
                     ModelState.AddModelError("Email", "Invalid Email or Password");
+                    return Page();
                 }
             }
         }

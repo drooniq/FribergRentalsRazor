@@ -3,19 +3,22 @@
 @{
 }
 
-<h1>Login</h1>
+<div class="panel neutral">
+    <h1>Login Page</h1>
 
-<form method="post">
-    <div asp-validation-summary="All"></div>
-    <div class="container">
-        <label asp-for="Admin.Email">Username : </label>
-        <input asp-for="Admin.Email" type="text" required />
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="col-md-4">
+            <label asp-for="Admin.Email">Username : </label>
+            <input class="form-size" asp-for="Admin.Email" type="text" required />
 
-        <label asp-for="Admin.Password">Password : </label>
-        <input asp-for="Admin.Password" type="password" required />
+            <label asp-for="Admin.Password">Password : </label>
+            <input class="form-size" asp-for="Admin.Password" type="password" required />
 
-        <div class="form-group">
-            <input type="submit" value="Login" class="btn btn-primary" />
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn positive" />
+                <a class="btn function" asp-page="Index">Cancel</a>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

@@ -12,11 +12,11 @@ namespace FribergRentalsRazor.Pages
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICustomer customerRepository;
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(ICustomer customerRepository)
         {
-            _context = context;
+            this.customerRepository = customerRepository;
         }
 
         public IActionResult OnGet()
@@ -28,15 +28,15 @@ namespace FribergRentalsRazor.Pages
         public Models.Customer Customer { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost(Models.Customer customer)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Customers.Add(Customer);
-            await _context.SaveChangesAsync();
+            customerRepository.Add(Customer);
+            customerRepository.SaveChanges();
 
             return RedirectToPage("./Index");
         }

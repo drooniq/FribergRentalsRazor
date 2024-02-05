@@ -12,9 +12,5 @@ namespace FribergRentalsRazor.Pages
         {
             _logger = logger;
         }
-
-        public void OnGet()
-        {
-        }
     }
 }
