@@ -1,11 +1,16 @@
-﻿namespace FribergRentalsRazor.Models
+﻿using Humanizer;
+using System.ComponentModel.DataAnnotations;
+
+namespace FribergRentalsRazor.Models
 {
     public class Booking
     {
         public int BookingId { get; set; }
-        public int CustomerId { get; set; }
-        public int CarId { get; set; }
-        public string RentalStartDate { get; set; }
-        public string RentalReturnDate { get; set; }
+        public Customer Customer { get; set; }
+        public Car Car { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime RentalStartDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime RentalReturnDate { get; set; }
     }
 }

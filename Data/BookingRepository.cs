@@ -15,7 +15,11 @@ namespace FribergRentalsRazor.Data
 
         public Booking Add(Booking entity)
         {
-            return applicationDbContext.Bookings.Add(entity).Entity;
+            var booking = applicationDbContext.Bookings.Add(entity).Entity;
+            applicationDbContext.Entry(entity.Car).State = EntityState.Unchanged;
+            applicationDbContext.Entry(entity.Customer).State = EntityState.Unchanged;
+            applicationDbContext.SaveChanges();
+            return booking;
         }
 
         public IEnumerable<Booking> GetAll()

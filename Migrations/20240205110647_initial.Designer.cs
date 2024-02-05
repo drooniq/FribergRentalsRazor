@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FribergRentalsRazor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240204222509_correcting customer")]
-    partial class correctingcustomer
+    [Migration("20240205110647_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -68,6 +68,10 @@ namespace FribergRentalsRazor.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookingId");
+
+                    b.HasIndex("CarId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Booking", (string)null);
                 });
@@ -144,6 +148,25 @@ namespace FribergRentalsRazor.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customer", (string)null);
+                });
+
+            modelBuilder.Entity("FribergRentalsRazor.Models.Booking", b =>
+                {
+                    b.HasOne("FribergRentalsRazor.Models.Car", "Car")
+                        .WithMany()
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FribergRentalsRazor.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,8 +18,13 @@ namespace FribergRentalsRazor
             builder.Services.AddTransient<ICar, CarRepository>();
             builder.Services.AddTransient<ICustomer, CustomerRepository>();
             builder.Services.AddTransient<IBooking, BookingRepository>();
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            builder.Services.AddDistributedMemoryCache();
 
             builder.Services.AddSession(options => {
+                options.Cookie.IsEssential = true;
+                options.Cookie.HttpOnly = true;
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 

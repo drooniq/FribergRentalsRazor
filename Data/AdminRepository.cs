@@ -51,6 +51,5 @@ namespace FribergRentalsRazor.Data
             applicationDbContext.SaveChangesAsync();
             return admin;
         }
-
     }
 }
