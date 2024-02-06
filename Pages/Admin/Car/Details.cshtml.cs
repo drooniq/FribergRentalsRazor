@@ -12,11 +12,11 @@ namespace FribergRentalsRazor.Pages.Admin.Car
 {
     public class DetailsModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICar carRepository;
 
-        public DetailsModel(ApplicationDbContext context)
+        public DetailsModel(ICar carRepository)
         {
-            _context = context;
+            this.carRepository = carRepository;
         }
 
         public Models.Car Car { get; set; } = default!;
@@ -25,10 +25,10 @@ namespace FribergRentalsRazor.Pages.Admin.Car
         {
             if (id == null)
             {
-                return NotFound();
+                return Page();
             }
 
-            var car = await _context.Cars.FirstOrDefaultAsync(m => m.Id == id);
+            var car = carRepository.GetById(id);
             if (car == null)
             {
                 return NotFound();

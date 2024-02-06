@@ -1,0 +1,13 @@
+﻿@{
+    if (Context.Session == null | Context.Session.Keys.Count() == 0)
+    {
+        Context.Response.Redirect("/Login");
+    }
+    else
+    {
+        if (string.IsNullOrEmpty(Context.Session.GetString("LoggedInAdmin")))
+        {
+            Context.Response.Redirect("/Login");
+        }
+    }
+}

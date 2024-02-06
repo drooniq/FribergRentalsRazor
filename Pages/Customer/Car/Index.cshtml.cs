@@ -12,18 +12,18 @@ namespace FribergRentalsRazor.Pages.Customer.Car
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICar carRepository;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(ICar carRepository)
         {
-            _context = context;
+            this.carRepository = carRepository;
         }
 
         public IList<Models.Car> Car { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Car = await _context.Cars.ToListAsync();
+            Car = carRepository.GetAll().ToList();
         }
     }
 }

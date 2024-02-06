@@ -13,11 +13,11 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICustomer customerRepository;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(ICustomer customerRepository)
         {
-            _context = context;
+            this.customerRepository = customerRepository;
         }
 
         [BindProperty]
@@ -30,7 +30,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
                 return NotFound();
             }
 
-            var customer =  await _context.Customers.FirstOrDefaultAsync(m => m.CustomerId == id);
+            var customer =  customerRepository.GetById(id);
             if (customer == null)
             {
                 return NotFound();
@@ -39,8 +39,6 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,11 +46,9 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
                 return Page();
             }
 
-            _context.Attach(Customer).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                customerRepository.Update(Customer);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,7 +67,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
 
         private bool CustomerExists(int id)
         {
-            return _context.Customers.Any(e => e.CustomerId == id);
+            return (customerRepository.GetById(id) != null);
         }
     }
 }

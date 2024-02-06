@@ -47,7 +47,8 @@ namespace FribergRentalsRazor.Data
         public Car Update(Car entity)
         {
             var car = applicationDbContext.Update<Car>(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            applicationDbContext.Attach(entity).State = EntityState.Modified;
+            applicationDbContext.SaveChanges();
             return car;
         }
     }

@@ -5,8 +5,9 @@ namespace FribergRentalsRazor.Pages.Customer
 {
     public class IndexModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            return RedirectToPage("/Login");
         }
     }
 }

@@ -12,18 +12,18 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
 {
     public class IndexModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICustomer customerRepository;
 
-        public IndexModel(ApplicationDbContext context)
+        public IndexModel(ICustomer customerRepository)
         {
-            _context = context;
+            this.customerRepository = customerRepository;
         }
 
         public IList<Models.Customer> Customer { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Customer = await _context.Customers.ToListAsync();
+            Customer = customerRepository.GetAll().ToList();
         }
     }
 }

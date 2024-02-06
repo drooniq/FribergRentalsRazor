@@ -12,11 +12,11 @@ namespace FribergRentalsRazor.Pages.Admin.Car
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICar carRepository;
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(ICar carRepository)
         {
-            _context = context;
+            this.carRepository = carRepository;
         }
 
         public IActionResult OnGet()
@@ -27,7 +27,6 @@ namespace FribergRentalsRazor.Pages.Admin.Car
         [BindProperty]
         public Models.Car Car { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,8 +34,8 @@ namespace FribergRentalsRazor.Pages.Admin.Car
                 return Page();
             }
 
-            _context.Cars.Add(Car);
-            await _context.SaveChangesAsync();
+            carRepository.Add(Car);
+            carRepository.SaveChanges();
 
             return RedirectToPage("./Index");
         }

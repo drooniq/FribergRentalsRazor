@@ -12,11 +12,11 @@ namespace FribergRentalsRazor.Pages.Admin.Car
 {
     public class DeleteModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICar carRepository;
 
-        public DeleteModel(ApplicationDbContext context)
+        public DeleteModel(ICar carRepository)
         {
-            _context = context;
+            this.carRepository = carRepository;
         }
 
         [BindProperty]
@@ -26,10 +26,10 @@ namespace FribergRentalsRazor.Pages.Admin.Car
         {
             if (id == null)
             {
-                return NotFound();
+                return Page();
             }
 
-            var car = await _context.Cars.FirstOrDefaultAsync(m => m.Id == id);
+            var car = carRepository.GetById(id);
 
             if (car == null)
             {
@@ -49,12 +49,11 @@ namespace FribergRentalsRazor.Pages.Admin.Car
                 return NotFound();
             }
 
-            var car = await _context.Cars.FindAsync(id);
+            var car = carRepository.GetById(id);
             if (car != null)
             {
                 Car = car;
-                _context.Cars.Remove(Car);
-                await _context.SaveChangesAsync();
+                carRepository.Remove(Car);
             }
 
             return RedirectToPage("./Index");

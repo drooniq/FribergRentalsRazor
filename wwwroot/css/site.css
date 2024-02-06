@@ -207,3 +207,7 @@ a {
     .form-size {
         width: 100%;
     }
+
+.carImage {
+    width: 100px;
+}

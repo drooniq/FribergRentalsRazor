@@ -1,15 +1,18 @@
 ﻿@page
-@model FribergRentalsRazor.Pages.Customer.Booking.IndexModel
+@model FribergRentalsRazor.Pages.Admin.Booking.IndexModel
 @{
 }
 
-<partial name="_autoCustomer" />
+<partial name="_authAdmin" />
 
-<h1>Listing all my Bookings</h1>
+<h1>Listing Bookings</h1>
 
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].Customer.CustomerId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Bookings[0].Customer)
             </th>
@@ -22,23 +25,38 @@
             <th>
                 @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
             </th>
+            <th>
+                Buttons
+            </th>
         </tr>
     </thead>
     <tbody>
+        @if (Model.Bookings.Count == 0)
+        {
+            <tr>
+                <td colspan="6">No bookings found</td>
+            </tr>
+        }
         @foreach (var item in Model.Bookings)
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Customer.CustomerId)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Customer.Email)
                 </td>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" width="100px" />
+                    <img class="carImage" src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RentalStartDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RentalReturnDate)
+                </td>
+                <td>
+                    <a class="btn error" asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
                 </td>
             </tr>
         }

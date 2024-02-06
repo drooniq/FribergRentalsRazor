@@ -13,11 +13,11 @@ namespace FribergRentalsRazor.Pages.Admin.Car
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICar carRepository;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(ICar carRepository)
         {
-            _context = context;
+            this.carRepository = carRepository;
         }
 
         [BindProperty]
@@ -27,10 +27,10 @@ namespace FribergRentalsRazor.Pages.Admin.Car
         {
             if (id == null)
             {
-                return NotFound();
+                return Page();
             }
 
-            var car =  await _context.Cars.FirstOrDefaultAsync(m => m.Id == id);
+            var car =  carRepository.GetById(id);
             if (car == null)
             {
                 return NotFound();
@@ -39,8 +39,6 @@ namespace FribergRentalsRazor.Pages.Admin.Car
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -48,11 +46,9 @@ namespace FribergRentalsRazor.Pages.Admin.Car
                 return Page();
             }
 
-            _context.Attach(Car).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                var updatedCar = carRepository.Update(Car);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,7 +67,7 @@ namespace FribergRentalsRazor.Pages.Admin.Car
 
         private bool CarExists(int id)
         {
-            return _context.Cars.Any(e => e.Id == id);
+            return (carRepository.GetById(id) != null);
         }
     }
 }

@@ -1,0 +1,55 @@
+﻿@page
+@model FribergRentalsRazor.Pages.Admin.Booking.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<partial name="_authAdmin" />
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Booking</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.BookingId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.BookingId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.Customer.CustomerId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.Customer.CustomerId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.Customer.FullName)
+            @Html.DisplayNameFor(model => model.Booking.Customer.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.Customer.FullName)
+            @Html.DisplayFor(model => model.Booking.Customer.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.RentalStartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.RentalStartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Booking.RentalReturnDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Booking.RentalReturnDate)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Booking.BookingId" />
+        <input type="submit" class="btn positive" value="Delete" />
+        <a class="btn function" asp-page="./Index">Cancel</a>
+    </form>
+</div>

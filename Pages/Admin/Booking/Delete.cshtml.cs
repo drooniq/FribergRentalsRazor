@@ -8,37 +8,36 @@ using Microsoft.EntityFrameworkCore;
 using FribergRentalsRazor.Data;
 using FribergRentalsRazor.Models;
 
-namespace FribergRentalsRazor.Pages.Admin.Customer
+namespace FribergRentalsRazor.Pages.Admin.Booking
 {
     public class DeleteModel : PageModel
     {
+        private readonly IBooking bookingRepository;
 
-        private readonly ICustomer customerRepository;
-
-        public DeleteModel(ICustomer customerRepository)
+        public DeleteModel(IBooking bookingRepository)
         {
-            this.customerRepository = customerRepository;
+            this.bookingRepository = bookingRepository;
         }
 
         [BindProperty]
-        public Models.Customer Customer { get; set; } = default!;
+        public Models.Booking Booking { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return Page();
             }
 
-            var customer = customerRepository.GetById(id);
+            var booking = bookingRepository.GetById(id);
 
-            if (customer == null)
+            if (booking == null)
             {
                 return NotFound();
             }
             else
             {
-                Customer = customer;
+                Booking = booking;
             }
             return Page();
         }
@@ -47,14 +46,14 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
         {
             if (id == null)
             {
-                return NotFound();
+                return Page();
             }
 
-            var customer = customerRepository.GetById(id);
-            if (customer != null)
+            var booking = bookingRepository.GetById(id);
+            if (booking != null)
             {
-                Customer = customer;
-                customerRepository.Remove(Customer);
+                Booking = booking;
+                bookingRepository.Remove(Booking);
             }
 
             return RedirectToPage("./Index");

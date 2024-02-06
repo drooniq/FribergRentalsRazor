@@ -49,7 +49,8 @@ namespace FribergRentalsRazor.Data
         public Customer Update(Customer entity)
         {
             var customer = applicationDbContext.Update<Customer>(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            applicationDbContext.Attach(entity).State = EntityState.Modified;
+            applicationDbContext.SaveChanges();
             return customer;
         }
     }
