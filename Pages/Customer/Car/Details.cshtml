@@ -44,15 +44,19 @@
             @Html.DisplayFor(model => model.Car.Comment)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Car.ImageUrls)
+            @Html.DisplayNameFor(model => model.Car.ImageUrls[0])
         </dt>
         <dd class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Car.ImageUrls[0])
             @{
-                foreach (var item in Model.Car.ImageUrls)
-                {
-                    <img src="@item" width="200" height=auto/>
-                    <button>Delete</button>
-                }
+                // if (Model.Car.ImageUrls != null)
+                // {
+                //     foreach (var item in Model.Car.ImageUrls)
+                //     {
+                //         <img src="@item" width="200" height=auto/>
+                //         <button>Delete</button>
+                //     }
+                // }
             }
         </dd>
     </dl>

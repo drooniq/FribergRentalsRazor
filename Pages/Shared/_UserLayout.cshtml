@@ -42,19 +42,19 @@
             if (Context.Session.GetString("LoggedInAdmin") != null)
             {
                 <li class="nav-item">
-                    <a class="nav-link">Admin: @Context.Session.GetString("LoggedInAdmin")</a>
+                    <p class="positive" style="color: black">Admin: @Context.Session.GetString("LoggedInAdmin")</p>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-sm btn-primary" asp-page="/Logout">Logout</a>
+                    <a class="btn-sm function" asp-page="/Logout">Logout</a>
                 </li>
             }
             else if (Context.Session.GetString("LoggedInCustomer") != null)
             {
                 <li class="nav-item">
-                    <a class="nav-link">Customer: @Context.Session.GetString("LoggedInCustomer")</a>
+                    <p class="positive" style="color: black">Customer: @Context.Session.GetString("LoggedInCustomer")</p>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-sm btn-primary" asp-page="/Logout">Logout</a>
+                    <a class="btn-sm function" asp-page="/Logout">Logout</a>
                 </li>
             }
             else

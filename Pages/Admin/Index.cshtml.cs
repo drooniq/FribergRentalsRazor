@@ -7,7 +7,7 @@ namespace FribergRentalsRazor.Pages.Admin
     {
         public IActionResult OnGet()
         {
-            return RedirectToPage("/Login");
+            return Page();
         }
     }
 }

@@ -50,9 +50,9 @@ namespace FribergRentalsRazor.Data
         {
             //return applicationDbContext.Bookings.Find(id);
             return applicationDbContext.Bookings.Where(b => b.BookingId == id)
-                .Include(c => c.Customer)
-                .Include(c => c.Car)
-                .FirstOrDefault();
+                                                .Include(c => c.Customer)
+                                                .Include(c => c.Car)
+                                                .FirstOrDefault();
         }
 
         public void SaveChanges()

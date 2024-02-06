@@ -19,6 +19,7 @@ namespace FribergRentalsRazor.Pages.Customer.Car
             this.carRepository = carRepository;
         }
 
+        [BindProperty]
         public Models.Car Car { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -31,7 +32,7 @@ namespace FribergRentalsRazor.Pages.Customer.Car
             var car = carRepository.GetById(id);
             if (car == null)
             {
-                return NotFound();
+                return Page();
             }
             else
             {

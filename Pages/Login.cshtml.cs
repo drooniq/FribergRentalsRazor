@@ -1,6 +1,7 @@
 using FribergRentalsRazor.Data;
 using FribergRentalsRazor.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Cryptography;
 
@@ -21,13 +22,22 @@ namespace FribergRentalsRazor.Pages
             customerRepository = new CustomerRepository(context);
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("LoggedInAdmin") != null || HttpContext.Session.GetString("LoggedInCustomer") != null)
+            {
+                ModelState.AddModelError("LoggedIn", "You are already logged in. Logout first");
+                return Page();
+                //return RedirectToPage("/Logout");
+            }
+
             Admins = adminRepository.GetAll().ToList() ?? new List<Models.Admin>();
+            return Page();
         }
 
         public IActionResult OnPost(Models.Admin admin)
         {
+
             var Admin = adminRepository.Find(a => a.Email == admin.Email && a.Password == admin.Password);
             if (Admin.Count() > 0)
             {
