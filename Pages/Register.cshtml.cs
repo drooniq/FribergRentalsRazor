@@ -27,7 +27,6 @@ namespace FribergRentalsRazor.Pages
         [BindProperty]
         public Models.Customer Customer { get; set; } = default!;
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost(Models.Customer customer)
         {
             if (!ModelState.IsValid)

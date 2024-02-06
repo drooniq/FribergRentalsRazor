@@ -60,7 +60,7 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
                 Customer = Customer,
                 Car = Car,
                 RentalStartDate = DateTime.Now,
-                RentalReturnDate = DateTime.Now
+                RentalReturnDate = DateTime.Now.AddDays(1)
             };
 
             return Page();
@@ -75,9 +75,9 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
                 return Page();
             }
 
-            bookingRepository.Add(Booking);
+            Models.Booking bookingObject = bookingRepository.Add(Booking);
 
-            return RedirectToPage("/Customer/Booking/Confirmation");
+            return RedirectToPage("/Customer/Booking/Confirmation", "Booking", new { id = bookingObject.BookingId });
         }
     }
 }

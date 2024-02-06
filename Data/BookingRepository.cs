@@ -38,12 +38,21 @@ namespace FribergRentalsRazor.Data
 
         public IEnumerable<Booking> Find(Expression<Func<Booking, bool>> predicate)
         {
-            return applicationDbContext.Bookings.AsQueryable().Where(predicate).ToList();
+            return applicationDbContext.Bookings
+                .Include(c => c.Customer)
+                .Include(c => c.Car)
+                .AsQueryable()
+                .Where(predicate)
+                .ToList();
         }
 
         public Booking GetById(int? id)
         {
-            return applicationDbContext.Bookings.Find(id);
+            //return applicationDbContext.Bookings.Find(id);
+            return applicationDbContext.Bookings.Where(b => b.BookingId == id)
+                .Include(c => c.Customer)
+                .Include(c => c.Car)
+                .FirstOrDefault();
         }
 
         public void SaveChanges()
