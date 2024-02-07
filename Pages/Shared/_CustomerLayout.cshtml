@@ -18,7 +18,30 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <partial name="_UserLayout" />
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Customer/Car/Index">Cars</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Customer/Booking/Index">Bookings</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="loggedUser">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <p class="positive" style="color: black">Customer: @Context.Session.GetString("LoggedInCustomer")</p>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn-sm function" asp-page="/Logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>

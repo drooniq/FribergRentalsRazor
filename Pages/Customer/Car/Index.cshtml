@@ -5,30 +5,28 @@
     ViewData["Title"] = "Index";
 }
 
-<partial name="_authCustomer" />
-
-<h1>Car - Index</h1>
+<h1>Available Car Listing</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].Brand)
+                @Html.DisplayNameFor(model => model.Cars[0].Brand)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].Model)
+                @Html.DisplayNameFor(model => model.Cars[0].Model)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].Year)
+                @Html.DisplayNameFor(model => model.Cars[0].Year)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].CostPerDay)
+                @Html.DisplayNameFor(model => model.Cars[0].CostPerDay)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].Comment)
+                @Html.DisplayNameFor(model => model.Cars[0].Comment)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Car[0].ImageUrls)
+                @Html.DisplayNameFor(model => model.Cars[0].ImageUrls)
             </th>
             <th>
             </th>
@@ -37,7 +35,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Car)
+        @if (Model.Cars.Count == 0)
+        {
+            <tr>
+                <td colspan="8">No cars available</td>
+            </tr>
+        }
+        @foreach (var item in Model.Cars)
         {
             <tr>
                 <td>
@@ -59,10 +63,10 @@
                     <img src="@item.ImageUrls[0].ToString()" alt="@item.Brand @item.Model" width="100" height="100" />
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn-sm function" asp-page="./Details" asp-route-id="@item.Id">Details</a>
                 </td>
                 <td>
-                    <a class="btn btn-primary" asp-page="../Booking/Create" asp-route-id="@item.Id">Book It</a>
+                    <a class="btn-sm function" asp-page="../Booking/Create" asp-route-id="@item.Id">Book It</a>
                 </td>
             </tr>
         }

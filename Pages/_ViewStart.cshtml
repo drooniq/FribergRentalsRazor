@@ -1,3 +1,19 @@
 ﻿@{
-    Layout = "_Layout";
+    ISession currentSession = Context.Session;
+
+    if(currentSession != null && currentSession.Keys != null && currentSession.Keys.Count() > 0)
+    {
+        if (currentSession.GetString("LoggedInAdmin") != null)
+        {
+            Layout = "_AdminLayout";
+        }
+        if (currentSession.GetString("LoggedInCustomer") != null)
+        {
+            Layout = "_CustomerLayout";
+        }
+    }
+    else
+    {
+        Layout = "_NoUserLayout";
+    }
 }

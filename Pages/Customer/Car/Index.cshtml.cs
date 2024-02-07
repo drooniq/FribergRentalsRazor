@@ -10,20 +10,42 @@ using FribergRentalsRazor.Models;
 
 namespace FribergRentalsRazor.Pages.Customer.Car
 {
+    [BindProperties]
     public class IndexModel : PageModel
     {
         private readonly ICar carRepository;
+        private readonly IBooking bookingRepository;
 
-        public IndexModel(ICar carRepository)
+        public IndexModel(ICar carRepository, IBooking bookingRepository)
         {
             this.carRepository = carRepository;
+            this.bookingRepository = bookingRepository;
         }
 
-        public IList<Models.Car> Car { get;set; } = default!;
+        public List<Models.Car> Cars { get;set; } = new List<Models.Car>();
+        private IEnumerable<Models.Booking> currentBookings { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public IActionResult OnGet()
         {
-            Car = carRepository.GetAll().ToList();
+            currentBookings = bookingRepository
+                .GetAll()
+                .Where(d => d.RentalReturnDate >= DateTime.Now)
+                .Where(d => d.RentalStartDate <= DateTime.Now)
+                .AsQueryable()
+                .Include(c => c.Car)
+                .Include(c => c.Customer);
+
+            var allCars = carRepository.GetAll();
+
+            foreach (var car in allCars)
+            {
+                if (!currentBookings.Any(d => d.Car.Id == car.Id))
+                {
+                    Cars.Add(car);
+                }
+            }
+
+            return Page();
         }
     }
 }
