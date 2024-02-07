@@ -1,6 +1,7 @@
 using FribergRentalsRazor.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace FribergRentalsRazor.Pages.Customer.Booking
 {
@@ -18,7 +19,13 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
 
         public void OnGet()
         {
-            Bookings = booking.GetAll().OrderByDescending( t => t.RentalReturnDate).ToList();
+            Bookings = booking.GetAll()
+                .AsQueryable()
+                .Include( c => c.Customer)
+                .Include( c => c.Car)
+                .Where( c => c.Customer.CustomerId == HttpContext.Session.GetInt32("CustomerId"))
+                .OrderByDescending( t => t.BookingId)
+                .ToList();
         }
     }
 }

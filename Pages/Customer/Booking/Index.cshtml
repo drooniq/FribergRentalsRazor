@@ -22,6 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
             </th>
+            <th>
+                Buttons
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -45,6 +48,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.RentalReturnDate)
+                </td>
+                <td>
+                    <a class="btn error" asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
                 </td>
             </tr>
         }
