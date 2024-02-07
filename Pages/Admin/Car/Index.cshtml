@@ -7,11 +7,12 @@
 
 <partial name="_authAdmin" />
 
-<h1>Admin Car - Index</h1>
+<h1>Admin - Listing all cars</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn positive" asp-page="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -59,9 +60,9 @@
                     <img src="@item.ImageUrls[0].ToString()" alt="@item.Brand @item.Model" width="100" height="100" />
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn-sm function" asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                    <a class="btn-sm function" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                    <a class="btn-sm error" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

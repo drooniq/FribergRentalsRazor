@@ -14,6 +14,7 @@ namespace FribergRentalsRazor.Models
         public string Model { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
         public int Year { get; set; }
 
         [Required]

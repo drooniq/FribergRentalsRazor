@@ -29,6 +29,9 @@
     --yellow: #ffb915;
     --error-red: #ff4f69;
     --error-dark-red: #fa0025;
+    --gray-dark: #555;
+    --gray-medium: #888;
+    --gray-light: #BBB;
 }
 
 body {
@@ -50,31 +53,45 @@ header {
 .logo {
     align-self: center;
     padding: 5px;
+    z-index: 1;
 }
 
 nav {
-    align-self: flex-start;
+    display: flex;
     flex: 1;
+    height: 4rem;
 }
 
-    nav li, a {
-        color: white;
-        list-style: none;
-        display: inline-block;
-        text-decoration: none;
-        border-radius: 5px;
-        padding: 5px;
-    }
+div.nav-main-links {
+    display: flex;
+    justify-content: space-between;
+}
 
-    nav li {
-        margin: 5px;
-        padding: 10px 0px 10px 0px;
-    }
+div.nav-user-links {
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+}
 
-    nav a:hover {
+nav li, a {
+    color: white;
+    list-style: none;
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+nav li {
+    margin: 5px;
+    padding: 10px 0px 10px 0px;
+}
+
+    nav li a:hover {
         background-color: var(--primary-color);
         color: black;
         padding: 5px;
+        transition: 0.5s;
     }
 
 .icons {
@@ -89,7 +106,13 @@ nav {
 
 /* MAIN section of styling.  Main content of information */
 
+.mainContainer {
+    display: flex;
+    justify-content: center;
+}
+
 main {
+    width: 70%;
     background-color: white;
     padding: 10px;
 }
@@ -157,17 +180,42 @@ a {
     color: white;
 }
 
+.cancel {
+    background-color: var(--gray-medium);
+    border: 2px solid var(--gray-dark);
+    color: white;
+}
+
 /* Buttons */
-.btn {
-    padding: 0.8rem 20px;
+a.btn {
+    padding: 8px 20px;
     margin: 8px 0;
     border-radius: 8px;
     cursor: pointer;
     color: black;
+    font-size: 0.8rem;
+}
+
+a.btn:hover {
+    padding: 8px 20px;
+    margin: 8px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    color: black;
+    font-size: 0.8rem;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin: 8px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    color: black;
+    font-size: 0.8rem;
 }
 
     .btn:hover {
-        padding: 0.8rem 20px;
+        padding: 10px 20px;
         margin: 8px 0;
         border-radius: 8px;
         cursor: pointer;
@@ -233,4 +281,12 @@ input[type=radio] {
 
 .carImage {
     width: 100px;
+}
+
+/* Table section */
+td {
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    font-size: 0.8rem;
 }
