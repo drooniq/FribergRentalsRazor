@@ -18,6 +18,7 @@ namespace FribergRentalsRazor.Models
         public int Year { get; set; }
 
         [Required]
+        [Display(Name = "Cost Per Day")]
         public float CostPerDay { get; set; }
         
         public string Comment { get; set; }

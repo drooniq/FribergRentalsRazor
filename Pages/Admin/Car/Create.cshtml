@@ -7,46 +7,49 @@
 
 <partial name="_authAdmin" />
 
-<h1>Admin - Create a new car</h1>
+<div class="panel neutral">
+    <h1>Admin - Create a new car</h1>
 
-<h4>Car</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Car.Brand" class=""></label>
-                <input asp-for="Car.Brand" class="" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Car.Model" class=""></label>
-                <input asp-for="Car.Model" class="" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Car.Year" class=""></label>
-                <input asp-for="Car.Year" class="" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Car.Comment" class=""></label>
-                <input asp-for="Car.Comment" class="" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Car.CostPerDay" class=""></label>
-                <input asp-for="Car.CostPerDay" class="" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Car.ImageUrls" class=""></label>
-                <input asp-for="Car.ImageUrls"></input>
-            </div>
-            <div class="form-group">
-                <input class="btn positive" type="submit" value="Create" />
-                <a class="btn cancel" asp-page="/Admin/Car/Index" />Cancel</a>
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Car.Brand" class=""></label>
+                    <input asp-for="Car.Brand" class="form-size" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Car.Model" class=""></label>
+                    <input asp-for="Car.Model" class="form-size" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Car.Year" class=""></label>
+                    <input asp-for="Car.Year" class="form-size" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Car.Comment" class=""></label>
+                    <input asp-for="Car.Comment" class="form-size" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Car.CostPerDay" class=""></label>
+                    <input asp-for="Car.CostPerDay" class="form-size" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Car.ImageUrls" class=""></label>
+                    <input asp-for="Car.ImageUrls" class="form-size"></input>
+                </div>
+                <div class="form-group">
+                    <input class="btn positive" type="submit" value="Create" />
+                    <a class="btn cancel" asp-page="/Admin/Car/Index" />Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

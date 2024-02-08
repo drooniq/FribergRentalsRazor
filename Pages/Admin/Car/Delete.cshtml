@@ -7,6 +7,7 @@
 
 <partial name="_authAdmin" />
 
+<div class="panel neutral">
 <h1>Admin - Delete a car</h1>
 
 <h3>Are you sure you want to delete this car?</h3>
@@ -47,7 +48,12 @@
             @Html.DisplayNameFor(model => model.Car.ImageUrls)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.ImageUrls)
+            @{
+                foreach (var item in Model.Car.ImageUrls)
+                {
+                    <img src="@item" width="200" height=auto/>
+                }
+            }
         </dd>
     </dl>
     
@@ -56,4 +62,5 @@
         <input type="submit" value="Delete" class="btn error" />
         <a class="btn cancel" asp-page="./Index">Cancel</a>
     </form>
+</div>
 </div>
