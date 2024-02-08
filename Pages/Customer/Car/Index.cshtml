@@ -5,70 +5,69 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Available Car Listing</h1>
+<div class="panel neutral">
+    <h1>Available Car Listing</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Cars[0].Brand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cars[0].Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cars[0].Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cars[0].CostPerDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cars[0].Comment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cars[0].ImageUrls)
-            </th>
-            <th>
-            </th>
-            <th>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Cars.Count == 0)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td colspan="8">No cars available</td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Model)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Year)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].CostPerDay)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cars[0].ImageUrls)
+                </th>
+                <th>
+                    Actions
+                </th>
             </tr>
-        }
-        @foreach (var item in Model.Cars)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CostPerDay)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comment)
-                </td>
-                <td>
-                    <img src="@item.ImageUrls[0].ToString()" alt="@item.Brand @item.Model" width="100" height="100" />
-                </td>
-                <td>
-                    <a class="btn-sm function" asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                </td>
-                <td>
-                    <a class="btn-sm function" asp-page="../Booking/Create" asp-route-id="@item.Id">Book It</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (Model.Cars.Count == 0)
+            {
+                <tr>
+                    <td colspan="8">No cars available</td>
+                </tr>
+            }
+            @foreach (var item in Model.Cars)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Year)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CostPerDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        <img src="@item.ImageUrls[0].ToString()" alt="@item.Brand @item.Model" width="100" height="100" />
+                    </td>
+                    <td>
+                        <a class="btn-sm function" asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn-sm function" asp-page="../Booking/Create" asp-route-id="@item.Id">Book It</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
