@@ -7,7 +7,10 @@
     <h1>Login Page</h1>
 
     <form method="post">
-        <div class="text-danger" asp-validation-summary="All"></div>
+        @if (ModelState.ErrorCount > 0)
+        {
+            <div class="msg error" asp-validation-summary="All"></div>
+        }
         <div class="col-md-4">
             <label asp-for="Admin.Email">Username : </label>
             <input class="form-size" asp-for="Admin.Email" type="text" required />

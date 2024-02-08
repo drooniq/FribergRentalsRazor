@@ -6,25 +6,25 @@
 <partial name="_authCustomer" />
 
 <div class="panel neutral">
-<h1>Booking successful.</h1>
+    <h1>Booking successful.</h1>
 
-@{
-    double Cost = 0;
+    @{
+        double Cost = 0;
 
-    if (Model.Booking != null)
-    {
-        Cost = @Model.Booking.RentalReturnDate.Subtract(@Model.Booking.RentalStartDate).TotalDays * @Model.Booking.Car.CostPerDay;
+        if (Model.Booking != null)
+        {
+            Cost = @Model.Booking.RentalReturnDate.Subtract(@Model.Booking.RentalStartDate).TotalDays * @Model.Booking.Car.CostPerDay;
+        }
     }
-}
-            
-<p>Car: @Model.Booking.Car.Brand @Model.Booking.Car.Model @Model.Booking.Car.Year - @Model.Booking.Car.Comment</p>
-<p><img src="@Model.Booking.Car.ImageUrls[0]" alt="Car image" width="200" height="200" /></p>
-<p><strong>Rental Period:</strong> @Model.Booking.RentalStartDate - @Model.Booking.RentalReturnDate</p>
-<p><strong>Customer: </strong> @Model.Booking.Customer.FullName (@Model.Booking.Customer.Email)</p>
-<p />
-<p><h2>TotalCost: @Cost sek</h2></p>
-<hr />
-<h1>Thank you for booking with us!</h1>
+
+    <p>Car: @Model.Booking.Car.Brand @Model.Booking.Car.Model @Model.Booking.Car.Year - @Model.Booking.Car.Comment</p>
+    <p><img src="@Model.Booking.Car.ImageUrls[0]" alt="Car image" width="200" height="200" /></p>
+    <p><strong>Rental Period:</strong> @Model.Booking.RentalStartDate - @Model.Booking.RentalReturnDate</p>
+    <p><strong>Customer: </strong> @Model.Booking.Customer.FullName (@Model.Booking.Customer.Email)</p>
+    <p />
+    <p><h2>TotalCost: @Cost sek</h2></p>
+    <hr />
+    <h1>Thank you for booking with us!</h1>
 
     <a class="btn positive" asp-page="/Customer/Car/Index">Continue</a>
 </div>

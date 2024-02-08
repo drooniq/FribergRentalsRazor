@@ -7,39 +7,44 @@
 
 <partial name="_authCustomer" />
 
-<h1>Booking a car!</h1>
+<div class="panel neutral">
+    <h1>Booking a car!</h1>
 
-<form method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Booking.RentalStartDate" class="control-label"></label>
-        <input asp-for="Booking.RentalStartDate" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Booking.RentalReturnDate" class="control-label"></label>
-        <input asp-for="Booking.RentalReturnDate" class="form-control" />
-    </div>
-    <div class="HiddenValues">
-        <input type="hidden" asp-for="Booking.Car.Id"/>
-        <input type="hidden" asp-for="Booking.Car.Model" />
-        <input type="hidden" asp-for="Booking.Car.Brand" />
-        <input type="hidden" asp-for="Booking.Car.Year" />
-        <input type="hidden" asp-for="Booking.Car.Comment" />
-        <input type="hidden" asp-for="Booking.Car.CostPerDay" />
-        <input type="hidden" asp-for="Booking.Car.ImageUrls" />
-        <input type="hidden" asp-for="Booking.Customer.CustomerId" />
-        <input type="hidden" asp-for="Booking.Customer.Email" />
-        <input type="hidden" asp-for="Booking.Customer.Password" />
-        <input type="hidden" asp-for="Booking.Customer.FullName" />
-        <input type="hidden" asp-for="Booking.Customer.Address" />
-        <input type="hidden" asp-for="Booking.Customer.City" />
-        <input type="hidden" asp-for="Booking.Customer.State" />
-        <input type="hidden" asp-for="Booking.Customer.Zipcode" />
-        <input type="hidden" asp-for="Booking.Customer.Country" />
-        <input type="hidden" asp-for="Booking.Customer.Phone" />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create Booking" class="btn positive" />
-        <input type="submit" value="Cancel" class="btn cancel" />
-    </div>
-</form>
+    <form method="post">
+        @if (ModelState.ErrorCount > 0)
+        {
+            <div class="msg error" asp-validation-summary="All"></div>
+        }        
+        <div class="form-group">
+            <label asp-for="Booking.RentalStartDate" class="control-label"></label>
+            <input asp-for="Booking.RentalStartDate" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Booking.RentalReturnDate" class="control-label"></label>
+            <input asp-for="Booking.RentalReturnDate" class="form-control" />
+        </div>
+        <div class="HiddenValues">
+            <input type="hidden" asp-for="Booking.Car.Id" />
+            <input type="hidden" asp-for="Booking.Car.Model" />
+            <input type="hidden" asp-for="Booking.Car.Brand" />
+            <input type="hidden" asp-for="Booking.Car.Year" />
+            <input type="hidden" asp-for="Booking.Car.Comment" />
+            <input type="hidden" asp-for="Booking.Car.CostPerDay" />
+            <input type="hidden" asp-for="Booking.Car.ImageUrls" />
+            <input type="hidden" asp-for="Booking.Customer.CustomerId" />
+            <input type="hidden" asp-for="Booking.Customer.Email" />
+            <input type="hidden" asp-for="Booking.Customer.Password" />
+            <input type="hidden" asp-for="Booking.Customer.FullName" />
+            <input type="hidden" asp-for="Booking.Customer.Address" />
+            <input type="hidden" asp-for="Booking.Customer.City" />
+            <input type="hidden" asp-for="Booking.Customer.State" />
+            <input type="hidden" asp-for="Booking.Customer.Zipcode" />
+            <input type="hidden" asp-for="Booking.Customer.Country" />
+            <input type="hidden" asp-for="Booking.Customer.Phone" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create Booking" class="btn positive" />
+            <a class="btn cancel" asp-page="/Customer/Car/Index">Cancel</a>
+        </div>
+    </form>
+</div>
