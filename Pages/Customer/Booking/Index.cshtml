@@ -34,7 +34,8 @@
                 <td colspan="4">No bookings found</td>
             </tr>
         }
-        @foreach (var item in Model.Bookings)
+        <h2>Future Bookings</h2>
+        @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate > DateTime.Now))
         {
             <tr>
                 <td>
@@ -51,6 +52,26 @@
                 </td>
                 <td>
                     <a class="btn error" asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
+                </td>
+            </tr>
+        }
+        <h2>Old and Ongoing Bookings</h2>
+        @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate <= DateTime.Now))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Email)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" width="100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentalStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentalReturnDate)
+                </td>
+                <td>
                 </td>
             </tr>
         }
