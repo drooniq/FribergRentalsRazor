@@ -75,6 +75,21 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
                 return Page();
             }
 
+            var allBookingsForThisCar = bookingRepository.GetAll().Where(b => b.Car.Id == Car.Id);
+            foreach (var booking in allBookingsForThisCar)
+            {
+                if (Booking.RentalStartDate >= booking.RentalStartDate && Booking.RentalStartDate <= booking.RentalReturnDate)
+                {
+                    ModelState.AddModelError("CarAlreadyBooked", "Car is already booked for the selected dates");
+                    return Page();
+                }
+                if (Booking.RentalReturnDate >= booking.RentalStartDate && Booking.RentalReturnDate <= booking.RentalReturnDate)
+                {
+                    ModelState.AddModelError("CarAlreadyBooked", "Car is already booked for the selected dates");
+                    return Page();
+                }
+            }
+
             Models.Booking bookingObject = bookingRepository.Add(Booking);
 
             return RedirectToPage("/Customer/Booking/Confirmation", "Booking", new { id = bookingObject.BookingId });

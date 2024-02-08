@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using FribergRentalsRazor.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FribergRentalsRazor.Data
 {
@@ -15,6 +16,7 @@ namespace FribergRentalsRazor.Data
 
         public Booking Add(Booking entity)
         {
+            applicationDbContext.ChangeTracker.Clear();
             var booking = applicationDbContext.Bookings.Add(entity).Entity;
             applicationDbContext.Entry(entity.Car).State = EntityState.Unchanged;
             applicationDbContext.Entry(entity.Customer).State = EntityState.Unchanged;
