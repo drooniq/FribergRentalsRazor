@@ -7,6 +7,7 @@
 
 <h1>Listing all my Bookings</h1>
 
+<h2>Future bookings</h2>
 <table class="table">
     <thead>
         <tr>
@@ -34,7 +35,7 @@
                 <td colspan="4">No bookings found</td>
             </tr>
         }
-        <h2>Future Bookings</h2>
+
         @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate > DateTime.Now))
         {
             <tr>
@@ -55,7 +56,31 @@
                 </td>
             </tr>
         }
-        <h2>Old and Ongoing Bookings</h2>
+    </tbody>
+</table>
+
+<h2>Old or Ongoing bookings.</h2>
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].Car)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].RentalStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate <= DateTime.Now))
         {
             <tr>

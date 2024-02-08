@@ -24,7 +24,7 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
                 .Include( c => c.Customer)
                 .Include( c => c.Car)
                 .Where( c => c.Customer.CustomerId == HttpContext.Session.GetInt32("CustomerId"))
-                .OrderByDescending( t => t.BookingId)
+//                .OrderByDescending( t => t.BookingId)
                 .ToList();
         }
     }
