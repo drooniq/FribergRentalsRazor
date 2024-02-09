@@ -10,6 +10,10 @@
 <div class="panel neutral">
     <h1>Booking a car!</h1>
 
+    <h3>You wish to book this car: </h3>
+    @Html.DisplayFor(model => model.Booking.Car.Brand) @Html.DisplayFor(model => model.Booking.Car.Model) 
+    <p><img src="@Html.DisplayFor(model => model.Booking.Car.ImageUrls[0])" alt="Car image" width="200" height="200" /></p>
+
     <form method="post">
         @if (ModelState.ErrorCount > 0)
         {

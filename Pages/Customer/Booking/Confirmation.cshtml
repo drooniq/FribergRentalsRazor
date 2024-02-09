@@ -17,7 +17,7 @@
         }
     }
 
-    <p>Car: @Model.Booking.Car.Brand @Model.Booking.Car.Model @Model.Booking.Car.Year - @Model.Booking.Car.Comment</p>
+    <p>@Model.Booking.Car.Brand @Model.Booking.Car.Model @Model.Booking.Car.Year - @Model.Booking.Car.Comment</p>
     <p><img src="@Model.Booking.Car.ImageUrls[0]" alt="Car image" width="200" height="200" /></p>
     <p><strong>Rental Period:</strong> @Model.Booking.RentalStartDate - @Model.Booking.RentalReturnDate</p>
     <p><strong>Customer: </strong> @Model.Booking.Customer.FullName (@Model.Booking.Customer.Email)</p>
