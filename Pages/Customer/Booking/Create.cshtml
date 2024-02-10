@@ -11,14 +11,21 @@
     <h1>Booking a car!</h1>
 
     <h3>You wish to book this car: </h3>
-    @Html.DisplayFor(model => model.Booking.Car.Brand) @Html.DisplayFor(model => model.Booking.Car.Model) 
-    <p><img src="@Html.DisplayFor(model => model.Booking.Car.ImageUrls[0])" alt="Car image" width="200" height="200" /></p>
+    @Html.DisplayFor(model => model.Booking.Car.Brand) @Html.DisplayFor(model => model.Booking.Car.Model)
 
-    <form method="post">
-        @if (ModelState.ErrorCount > 0)
+    @if (Model.Booking.Car.ImageUrls != null)
+    {
+        @foreach (var imageUrl in Model.Booking.Car.ImageUrls.First())
         {
-            <div class="msg error" asp-validation-summary="All"></div>
-        }        
+            <p><img src="@imageUrl" alt="Car image" width="200" height=auto /></p>
+        }
+    }
+
+    @if (ModelState.ErrorCount > 0)
+    {
+        <div class="msg error" asp-validation-summary="All"></div>
+    }
+    <form method="post">
         <div class="form-group">
             <label asp-for="Booking.RentalStartDate" class="control-label"></label>
             <input asp-for="Booking.RentalStartDate" class="form-control" />
@@ -34,7 +41,7 @@
             <input type="hidden" asp-for="Booking.Car.Year" />
             <input type="hidden" asp-for="Booking.Car.Comment" />
             <input type="hidden" asp-for="Booking.Car.CostPerDay" />
-            <input type="hidden" asp-for="Booking.Car.ImageUrls" />
+            <input type="hidden" asp-for="Booking.Car.ImageUrls[0]" />
             <input type="hidden" asp-for="Booking.Customer.CustomerId" />
             <input type="hidden" asp-for="Booking.Customer.Email" />
             <input type="hidden" asp-for="Booking.Customer.Password" />

@@ -85,7 +85,7 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
             }
 
             IEnumerable<Models.Booking>? allBookingsForThisCar = (await bookingRepository.GetAllAsync()).Where(b => b.Car.Id == Car.Id);
-            
+
             foreach (var booking in allBookingsForThisCar)
             {
                 if (Booking.RentalStartDate >= booking.RentalStartDate && Booking.RentalStartDate <= booking.RentalReturnDate)
