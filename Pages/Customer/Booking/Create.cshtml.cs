@@ -9,9 +9,9 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
     [BindProperties]
     public class CreateModel : PageModel
     {
-        public Models.Car Car { get; set; }
-        public Models.Customer Customer { get; set; }
-        public Models.Booking Booking { get; set; }
+        public Models.Car? Car { get; set; }
+        public Models.Customer? Customer { get; set; }
+        public Models.Booking? Booking { get; set; }
 
         private readonly ICar carRepository;
         private readonly ICustomer customerRepository;
@@ -24,9 +24,10 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
             this.bookingRepository = bookingRepository;
         }
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Car = carRepository.GetById(id);
+            Car = await carRepository.GetByIdAsync(id);
+
             if (Car == null)
             {
                 ModelState.AddModelError("CarIdNotFound", "Could not book car by that ID: " + id);
@@ -39,7 +40,9 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
                 return RedirectToPage("/Login");
             }
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             string customerEmail = HttpContext.Session.GetString("LoggedInCustomer").ToString();
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             if (customerEmail == null)
             {
@@ -47,7 +50,7 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
                 return RedirectToPage("/Login");
             }
 
-            Customer = customerRepository.Find(c => c.Email == customerEmail).FirstOrDefault();
+            Customer = (await customerRepository.FindAsync(c => c.Email == customerEmail)).FirstOrDefault();
 
             if (Customer == null)
             {
@@ -66,16 +69,23 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             ModelState.Clear();
+
+            if (Booking == null)
+            {
+                ModelState.AddModelError("BookingNotCreated", "Booking object is null");
+                return Page();
+            }
 
             if (!TryValidateModel(Booking, nameof(Booking)))
             {
                 return Page();
             }
 
-            var allBookingsForThisCar = bookingRepository.GetAll().Where(b => b.Car.Id == Car.Id);
+            IEnumerable<Models.Booking>? allBookingsForThisCar = (await bookingRepository.GetAllAsync()).Where(b => b.Car.Id == Car.Id);
+            
             foreach (var booking in allBookingsForThisCar)
             {
                 if (Booking.RentalStartDate >= booking.RentalStartDate && Booking.RentalStartDate <= booking.RentalReturnDate)
@@ -90,7 +100,7 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
                 }
             }
 
-            Models.Booking bookingObject = bookingRepository.Add(Booking);
+            Models.Booking bookingObject = await bookingRepository.AddAsync(Booking);
 
             return RedirectToPage("/Customer/Booking/Confirmation", "Booking", new { id = bookingObject.BookingId });
         }

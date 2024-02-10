@@ -14,58 +14,64 @@ namespace FribergRentalsRazor.Data
             this.applicationDbContext = applicationDbContext;
         }
 
-        public Booking Add(Booking entity)
+        public async Task<Booking> AddAsync(Booking entity)
         {
             applicationDbContext.ChangeTracker.Clear();
             var booking = applicationDbContext.Bookings.Add(entity).Entity;
             applicationDbContext.Entry(entity.Car).State = EntityState.Unchanged;
             applicationDbContext.Entry(entity.Customer).State = EntityState.Unchanged;
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
             return booking;
         }
 
-        public IEnumerable<Booking> GetAll()
+        public async Task<IEnumerable<Booking>> GetAllAsync()
         {
-            return applicationDbContext.Bookings
+            var bookings = await applicationDbContext.Bookings
                 .Include(c => c.Customer)
-                .Include(c => c.Car);
+                .Include(c => c.Car)
+                .ToListAsync();
+
+            return bookings;
         }
 
-        public Booking Remove(Booking entity)
+        public async Task<Booking> RemoveAsync(Booking entity)
         {
             var admin = applicationDbContext.Bookings.Remove(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            await applicationDbContext.SaveChangesAsync();
             return admin;
         }
 
-        public IEnumerable<Booking> Find(Expression<Func<Booking, bool>> predicate)
+        public async Task<IEnumerable<Booking>> FindAsync(Expression<Func<Booking, bool>> predicate)
         {
-            return applicationDbContext.Bookings
+            var bookings = await applicationDbContext.Bookings
                 .Include(c => c.Customer)
                 .Include(c => c.Car)
                 .AsQueryable()
                 .Where(predicate)
-                .ToList();
+                .ToListAsync();
+            return bookings;
         }
 
-        public Booking GetById(int? id)
+        public async Task<Booking> GetByIdAsync(int? id)
         {
             //return applicationDbContext.Bookings.Find(id);
-            return applicationDbContext.Bookings.Where(b => b.BookingId == id)
+            var booking = await applicationDbContext.Bookings
+                                                .Where(b => b.BookingId == id)
                                                 .Include(c => c.Customer)
                                                 .Include(c => c.Car)
-                                                .FirstOrDefault();
+                                                .FirstOrDefaultAsync();
+            return booking;
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
         }
 
-        public Booking Update(Booking entity)
+        public async Task<Booking> UpdateAsync(Booking entity)
         {
             var admin = applicationDbContext.Update<Booking>(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            await applicationDbContext.SaveChangesAsync();
             return admin;
         }
 

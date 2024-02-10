@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FribergRentalsRazor.Migrations
 {
     /// <inheritdoc />
-    public partial class changesbookingdatetime : Migration
+    public partial class Changesbookingdatetime : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

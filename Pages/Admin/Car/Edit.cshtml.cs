@@ -30,7 +30,7 @@ namespace FribergRentalsRazor.Pages.Admin.Car
                 return Page();
             }
 
-            var car =  carRepository.GetById(id);
+            var car =  await carRepository.GetByIdAsync(id);
             if (car == null)
             {
                 return NotFound();
@@ -48,11 +48,11 @@ namespace FribergRentalsRazor.Pages.Admin.Car
 
             try
             {
-                var updatedCar = carRepository.Update(Car);
+                var updatedCar = await carRepository.UpdateAsync(Car);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CarExists(Car.Id))
+                if (!await CarExistsAsync(Car.Id))
                 {
                     return NotFound();
                 }
@@ -65,9 +65,9 @@ namespace FribergRentalsRazor.Pages.Admin.Car
             return RedirectToPage("./Index");
         }
 
-        private bool CarExists(int id)
+        private async Task<bool> CarExistsAsync(int id)
         {
-            return (carRepository.GetById(id) != null);
+            return (await carRepository.GetByIdAsync(id) != null);
         }
     }
 }

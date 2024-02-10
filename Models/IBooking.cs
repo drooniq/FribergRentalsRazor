@@ -4,12 +4,12 @@ namespace FribergRentalsRazor.Models
 {
     public interface IBooking
     {
-        Booking Add(Booking entity);
-        Booking Update(Booking entity);
-        Booking GetById(int? id);
-        Booking Remove(Booking entity);
-        IEnumerable<Booking> GetAll();
-        IEnumerable<Booking> Find(Expression<Func<Booking, bool>> predicate);
-        void SaveChanges();
+        Task<Booking> AddAsync(Booking entity);
+        Task<Booking> UpdateAsync(Booking entity);
+        Task<Booking> GetByIdAsync(int? id);
+        Task<Booking> RemoveAsync(Booking entity);
+        Task<IEnumerable<Booking>> GetAllAsync();
+        Task<IEnumerable<Booking>> FindAsync(Expression<Func<Booking, bool>> predicate);
+        Task SaveChangesAsync();
     }
 }

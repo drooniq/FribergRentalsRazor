@@ -7,7 +7,15 @@
 
 <h1>Listing all my Bookings</h1>
 <hr />
-<h2>Future bookings</h2>
+@if (Model.Bookings.Count == 0)
+{
+    <tr>
+        <td colspan="4">No bookings found</td>
+    </tr>
+}
+else
+{
+<h2 style="margin-top: 10px">Future bookings</h2>
 <table class="table">
     <thead>
         <tr>
@@ -32,13 +40,6 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model.Bookings.Count == 0)
-        {
-            <tr>
-                <td colspan="4">No bookings found</td>
-            </tr>
-        }
-
         @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate > DateTime.Now))
         {
             <tr>
@@ -66,7 +67,7 @@
     </tbody>
 </table>
 
-<h2>Old or Ongoing bookings.</h2>
+<h2 style="margin-top: 10px">Old or Ongoing bookings.</h2>
 <hr />
 <table>
     <thead>
@@ -112,3 +113,4 @@
         }
     </tbody>
 </table>
+}

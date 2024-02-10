@@ -15,43 +15,45 @@ namespace FribergRentalsRazor.Data
             this.applicationDbContext = applicationDbContext;
         }
 
-        public Customer Add(Customer entity)
+        public async Task<Customer> AddAsync(Customer entity)
         {
-            return applicationDbContext.Customers.Add(entity).Entity;
-        }
-
-        public IEnumerable<Customer> GetAll()
-        {
-            return applicationDbContext.Customers.ToList();
-        }
-
-        public Customer Remove(Customer entity)
-        {
-            var customer = applicationDbContext.Customers.Remove(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            var customer = applicationDbContext.Customers.Add(entity).Entity;
+            await applicationDbContext.SaveChangesAsync();
             return customer;
         }
 
-        public IEnumerable<Customer> Find(Expression<Func<Customer, bool>> predicate)
+        public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            return applicationDbContext.Customers.AsQueryable().Where(predicate).ToList();
+            return await applicationDbContext.Customers.ToListAsync();
         }
 
-        public Customer GetById(int? id)
+        public async Task<Customer> RemoveAsync(Customer entity)
         {
-            return applicationDbContext.Customers.Find(id);
+            var customer = applicationDbContext.Customers.Remove(entity).Entity;
+            await applicationDbContext.SaveChangesAsync();
+            return customer;
         }
 
-        public void SaveChanges()
+        public async Task<IEnumerable<Customer>> FindAsync(Expression<Func<Customer, bool>> predicate)
         {
-            applicationDbContext.SaveChanges();
+            return await applicationDbContext.Customers.AsQueryable().Where(predicate).ToListAsync();
         }
 
-        public Customer Update(Customer entity)
+        public async Task<Customer> GetByIdAsync(int? id)
+        {
+            return await applicationDbContext.Customers.FindAsync(id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<Customer> UpdateAsync(Customer entity)
         {
             var customer = applicationDbContext.Update<Customer>(entity).Entity;
             applicationDbContext.Attach(entity).State = EntityState.Modified;
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
             return customer;
         }
     }

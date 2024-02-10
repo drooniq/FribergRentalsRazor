@@ -13,42 +13,44 @@ namespace FribergRentalsRazor.Data
             this.applicationDbContext = applicationDbContext;
         }
 
-        public Admin Add(Admin entity)
+        public async Task<Admin> AddAsync(Admin entity)
         {
-            return applicationDbContext.Admins.Add(entity).Entity;
-        }
-
-        public IEnumerable<Admin> GetAll()
-        {
-            return applicationDbContext.Admins.ToList();
-        }
-
-        public Admin Remove(Admin entity)
-        {
-            var admin = applicationDbContext.Admins.Remove(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            var admin = applicationDbContext.Admins.Add(entity).Entity;
+            await applicationDbContext.SaveChangesAsync();
             return admin;
         }
 
-        public IEnumerable<Admin> Find(Expression<Func<Admin, bool>> predicate)
+        public async Task<IEnumerable<Admin>> GetAllAsync()
         {
-            return applicationDbContext.Admins.AsQueryable().Where(predicate).ToList();
+            return await applicationDbContext.Admins.ToListAsync();
         }
 
-        public Admin GetById(int? id)
+        public async Task<Admin> RemoveAsync(Admin entity)
         {
-            return applicationDbContext.Admins.Find(id);
+            var admin = applicationDbContext.Admins.Remove(entity).Entity;
+            await applicationDbContext.SaveChangesAsync();
+            return admin;
         }
 
-        public void SaveChanges()
+        public async Task<IEnumerable<Admin>> FindAsync(Expression<Func<Admin, bool>> predicate)
         {
-            applicationDbContext.SaveChanges();
+            return await applicationDbContext.Admins.AsQueryable().Where(predicate).ToListAsync();
         }
 
-        public Admin Update(Admin entity)
+        public async Task<Admin> GetByIdAsync(int? id)
+        {
+            return await applicationDbContext.Admins.FindAsync(id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<Admin> UpdateAsync(Admin entity)
         {
             var admin = applicationDbContext.Update<Admin>(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            await applicationDbContext.SaveChangesAsync();
             return admin;
         }
     }

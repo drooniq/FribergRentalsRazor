@@ -30,7 +30,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
                 return NotFound();
             }
 
-            var customer = customerRepository.GetById(id);
+            var customer = await customerRepository.GetByIdAsync(id);
 
             if (customer == null)
             {
@@ -50,11 +50,11 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
                 return NotFound();
             }
 
-            var customer = customerRepository.GetById(id);
+            var customer = await customerRepository.GetByIdAsync(id);
             if (customer != null)
             {
                 Customer = customer;
-                customerRepository.Remove(Customer);
+                await customerRepository.RemoveAsync(Customer);
             }
 
             return RedirectToPage("./Index");

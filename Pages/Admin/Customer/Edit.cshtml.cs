@@ -30,7 +30,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
                 return NotFound();
             }
 
-            var customer =  customerRepository.GetById(id);
+            var customer =  await customerRepository.GetByIdAsync(id);
             if (customer == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
 
             try
             {
-                customerRepository.Update(Customer);
+                await customerRepository.UpdateAsync(Customer);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -67,7 +67,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
 
         private bool CustomerExists(int id)
         {
-            return (customerRepository.GetById(id) != null);
+            return (customerRepository.GetByIdAsync(id) != null);
         }
     }
 }

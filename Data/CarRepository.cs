@@ -12,43 +12,45 @@ namespace FribergRentalsRazor.Data
         { 
             this.applicationDbContext = applicationDbContext;
         }
-        public Car Add(Car entity)
+        public async Task<Car> AddAsync(Car entity)
         {
-            return applicationDbContext.Cars.Add(entity).Entity;
-        }
-
-        public IEnumerable<Car> GetAll()
-        {
-            return applicationDbContext.Cars.ToList();
-        }
-
-        public Car Remove(Car entity)
-        {
-            var car = applicationDbContext.Cars.Remove(entity).Entity;
-            applicationDbContext.SaveChangesAsync();
+            var car = applicationDbContext.Cars.Add(entity).Entity;
+            await applicationDbContext.SaveChangesAsync();
             return car;
         }
 
-        public IEnumerable<Car> Find(Expression<Func<Car, bool>> predicate)
+        public async Task<IEnumerable<Car>> GetAllAsync()
         {
-            return applicationDbContext.Cars.AsQueryable().Where(predicate).ToList();
+            return await applicationDbContext.Cars.ToListAsync();
         }
 
-        public Car GetById(int? id)
+        public async Task<Car> RemoveAsync(Car entity)
         {
-            return applicationDbContext.Cars.Find(id);
+            var car = applicationDbContext.Cars.Remove(entity).Entity;
+            await applicationDbContext.SaveChangesAsync();
+            return car;
         }
 
-        public void SaveChanges()
+        public async Task<IEnumerable<Car>> FindAsync(Expression<Func<Car, bool>> predicate)
         {
-            applicationDbContext.SaveChanges();
+            return await applicationDbContext.Cars.AsQueryable().Where(predicate).ToListAsync();
         }
 
-        public Car Update(Car entity)
+        public async Task<Car> GetByIdAsync(int? id)
+        {
+            return await applicationDbContext.Cars.FindAsync(id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<Car> UpdateAsync(Car entity)
         {
             var car = applicationDbContext.Update<Car>(entity).Entity;
             applicationDbContext.Attach(entity).State = EntityState.Modified;
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
             return car;
         }
     }

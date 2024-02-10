@@ -12,7 +12,7 @@ namespace FribergRentalsRazor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240205110647_initial")]
-    partial class initial
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -29,7 +29,7 @@ namespace FribergRentalsRazor.Pages.Admin.Booking
                 return Page();
             }
 
-            var booking = bookingRepository.GetById(id);
+            var booking = await bookingRepository.GetByIdAsync(id);
 
             if (booking == null)
             {
@@ -49,11 +49,12 @@ namespace FribergRentalsRazor.Pages.Admin.Booking
                 return Page();
             }
 
-            var booking = bookingRepository.GetById(id);
+            var booking = await bookingRepository.GetByIdAsync(id);
+
             if (booking != null)
             {
                 Booking = booking;
-                bookingRepository.Remove(Booking);
+                await bookingRepository.RemoveAsync(Booking);
             }
 
             return RedirectToPage("./Index");

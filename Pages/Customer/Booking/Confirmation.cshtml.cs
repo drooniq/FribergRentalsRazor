@@ -9,16 +9,16 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
         private readonly IBooking booking;
 
         [BindProperty]
-        public Models.Booking Booking { get; set; }
+        public Models.Booking? Booking { get; set; }
 
         public ConfirmationModel(IBooking booking)
         {
             this.booking = booking;
         }
 
-        public void OnGetBooking(int id)
+        public async Task OnGetBookingAsync(int id)
         {
-            Booking = booking.GetById(id);
+            Booking = await booking.GetByIdAsync(id);
         }
     }
 }

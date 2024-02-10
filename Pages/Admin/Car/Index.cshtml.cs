@@ -23,7 +23,7 @@ namespace FribergRentalsRazor.Pages.Admin.Car
 
         public async Task OnGetAsync()
         {
-            Car = carRepository.GetAll().ToList();
+            Car = (IList<Models.Car>) await carRepository.GetAllAsync();
         }
     }
 }

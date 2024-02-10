@@ -27,15 +27,14 @@ namespace FribergRentalsRazor.Pages
         [BindProperty]
         public Models.Customer Customer { get; set; } = default!;
 
-        public IActionResult OnPost(Models.Customer customer)
+        public async Task<IActionResult> OnPostAsync(Models.Customer customer)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            customerRepository.Add(Customer);
-            customerRepository.SaveChanges();
+            await customerRepository.AddAsync(Customer);
 
             return RedirectToPage("./Index");
         }

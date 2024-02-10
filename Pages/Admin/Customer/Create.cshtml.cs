@@ -34,8 +34,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
                 return Page();
             }
 
-            customerRepository.Add(Customer);
-            customerRepository.SaveChanges();
+            await customerRepository.AddAsync(Customer);
 
             return RedirectToPage("./Index");
         }

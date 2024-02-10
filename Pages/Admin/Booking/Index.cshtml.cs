@@ -16,9 +16,9 @@ namespace FribergRentalsRazor.Pages.Admin.Booking
             this.booking = booking;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Bookings = booking.GetAll().OrderBy( b => b.BookingId).ToList();
+            Bookings = (await booking.GetAllAsync()).OrderBy( b => b.BookingId).ToList();
         }
     }
 }

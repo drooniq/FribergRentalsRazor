@@ -13,7 +13,7 @@ namespace FribergRentalsRazor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240205120823_changes booking datetime")]
-    partial class changesbookingdatetime
+    partial class Changesbookingdatetime
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

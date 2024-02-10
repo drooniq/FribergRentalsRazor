@@ -4,12 +4,12 @@ namespace FribergRentalsRazor.Models
 {
     public interface IAdmin
     {
-        Admin Add(Admin entity);
-        Admin Update(Admin entity);
-        Admin GetById(int? id);
-        Admin Remove(Admin entity);
-        IEnumerable<Admin> GetAll();
-        IEnumerable<Admin> Find(Expression<Func<Admin, bool>> predicate);
-        void SaveChanges();
+        Task<Admin> AddAsync(Admin entity);
+        Task<Admin> UpdateAsync(Admin entity);
+        Task<Admin> GetByIdAsync(int? id);
+        Task<Admin> RemoveAsync(Admin entity);
+        Task<IEnumerable<Admin>> GetAllAsync();
+        Task<IEnumerable<Admin>> FindAsync(Expression<Func<Admin, bool>> predicate);
+        Task SaveChangesAsync();
     }
 }

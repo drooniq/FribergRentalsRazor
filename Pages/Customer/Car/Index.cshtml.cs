@@ -25,17 +25,16 @@ namespace FribergRentalsRazor.Pages.Customer.Car
         public List<Models.Car> Cars { get;set; } = new List<Models.Car>();
         private IEnumerable<Models.Booking> currentBookings { get; set; } = default!;
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            currentBookings = bookingRepository
-                .GetAll()
+            currentBookings = (await bookingRepository.GetAllAsync())
                 .Where(d => d.RentalReturnDate >= DateTime.Now)
                 .Where(d => d.RentalStartDate <= DateTime.Now)
                 .AsQueryable()
                 .Include(c => c.Car)
                 .Include(c => c.Customer);
 
-            var allCars = carRepository.GetAll();
+            var allCars = await carRepository.GetAllAsync();
 
             foreach (var car in allCars)
             {

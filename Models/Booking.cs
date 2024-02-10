@@ -7,8 +7,12 @@ namespace FribergRentalsRazor.Models
     {
         [Key]
         public int BookingId { get; set; }
-        public Customer Customer { get; set; }
-        public Car Car { get; set; }
+
+        [Required]
+        public required Customer Customer { get; set; }
+
+        [Required]
+        public required Car Car { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Rent Date")]

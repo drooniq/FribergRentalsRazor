@@ -17,9 +17,9 @@ namespace FribergRentalsRazor.Pages.Customer.Booking
             this.booking = booking;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Bookings = booking.GetAll()
+            Bookings = (await booking.GetAllAsync())
                 .AsQueryable()
                 .Include( c => c.Customer)
                 .Include( c => c.Car)

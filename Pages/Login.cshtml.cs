@@ -13,8 +13,8 @@ namespace FribergRentalsRazor.Pages
         CustomerRepository customerRepository;
 
         [BindProperty]
-        public Models.Admin Admin { get; set; }
-        public List<Models.Admin> Admins { get; set; }
+        public Models.Admin? Admin { get; set; }
+        public List<Models.Admin>? Admins { get; set; }
 
         public LoginModel(ApplicationDbContext context)
         {
@@ -22,7 +22,7 @@ namespace FribergRentalsRazor.Pages
             customerRepository = new CustomerRepository(context);
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
             if (HttpContext.Session.GetString("LoggedInAdmin") != null || HttpContext.Session.GetString("LoggedInCustomer") != null)
             {
@@ -31,14 +31,14 @@ namespace FribergRentalsRazor.Pages
                 //return RedirectToPage("/Logout");
             }
 
-            Admins = adminRepository.GetAll().ToList() ?? new List<Models.Admin>();
+            Admins = (List<Models.Admin>) await adminRepository.GetAllAsync() ?? new List<Models.Admin>();
             return Page();
         }
 
-        public IActionResult OnPost(Models.Admin admin)
+        public async Task<IActionResult> OnPostAsync(Models.Admin admin)
         {
 
-            var Admin = adminRepository.Find(a => a.Email == admin.Email && a.Password == admin.Password);
+            var Admin = await adminRepository.FindAsync(a => a.Email == admin.Email && a.Password == admin.Password);
             if (Admin.Count() > 0)
             {
                 HttpContext.Session.SetString("LoggedInAdmin", Admin.ToList()[0].Email);
@@ -49,7 +49,7 @@ namespace FribergRentalsRazor.Pages
             }
             else
             {
-                var Customer = customerRepository.Find(c => c.Email == admin.Email && c.Password == admin.Password);
+                var Customer = await customerRepository.FindAsync(c => c.Email == admin.Email && c.Password == admin.Password);
                 if (Customer.Count() > 0)
                 {
                     HttpContext.Session.SetString("LoggedInCustomer", Customer.ToList()[0].Email);

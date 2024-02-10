@@ -1,5 +1,5 @@
 ﻿@{
-    if (Context.Session == null | Context.Session.Keys.Count() == 0)
+    if (Context.Session == null || Context.Session.Keys.Count() == 0)
     {
         Context.Response.Redirect("/Login");
     }

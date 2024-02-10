@@ -29,7 +29,8 @@ namespace FribergRentalsRazor.Pages.Customer.Car
                 return Page();
             }
 
-            var car = carRepository.GetById(id);
+            var car = await carRepository.GetByIdAsync(id);
+
             if (car == null)
             {
                 return Page();

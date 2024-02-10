@@ -34,8 +34,7 @@ namespace FribergRentalsRazor.Pages.Admin.Car
                 return Page();
             }
 
-            carRepository.Add(Car);
-            carRepository.SaveChanges();
+            await carRepository.AddAsync(Car);
 
             return RedirectToPage("./Index");
         }

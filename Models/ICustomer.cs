@@ -4,12 +4,12 @@ namespace FribergRentalsRazor.Models
 {
     public interface ICustomer
     {
-        Customer Add(Customer entity);
-        Customer Update(Customer entity);
-        Customer GetById(int? id);
-        Customer Remove(Customer entity);
-        IEnumerable<Customer> GetAll();
-        IEnumerable<Customer> Find(Expression<Func<Customer, bool>> predicate);
-        void SaveChanges();
+        Task<Customer> AddAsync(Customer entity);
+        Task<Customer> UpdateAsync(Customer entity);
+        Task<Customer> GetByIdAsync(int? id);
+        Task<Customer> RemoveAsync(Customer entity);
+        Task<IEnumerable<Customer>> GetAllAsync();
+        Task<IEnumerable<Customer>> FindAsync(Expression<Func<Customer, bool>> predicate);
+        Task SaveChangesAsync();
     }
 }

@@ -4,12 +4,12 @@ namespace FribergRentalsRazor.Models
 {
     public interface ICar
     {
-        Car Add(Car entity);
-        Car Update(Car entity);
-        Car GetById(int? id);
-        Car Remove(Car entity);
-        IEnumerable<Car> GetAll();
-        IEnumerable<Car> Find(Expression<Func<Car, bool>> predicate);
-        void SaveChanges();
+        Task<Car> AddAsync(Car entity);
+        Task<Car> UpdateAsync(Car entity);
+        Task<Car> GetByIdAsync(int? id);
+        Task<Car> RemoveAsync(Car entity);
+        Task<IEnumerable<Car>> GetAllAsync();
+        Task<IEnumerable<Car>> FindAsync(Expression<Func<Car, bool>> predicate);
+        Task SaveChangesAsync();
     }
 }

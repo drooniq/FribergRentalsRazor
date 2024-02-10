@@ -29,7 +29,7 @@ namespace FribergRentalsRazor.Pages.Admin.Car
                 return Page();
             }
 
-            var car = carRepository.GetById(id);
+            var car = await carRepository.GetByIdAsync(id);
 
             if (car == null)
             {
@@ -49,11 +49,12 @@ namespace FribergRentalsRazor.Pages.Admin.Car
                 return NotFound();
             }
 
-            var car = carRepository.GetById(id);
+            var car = await carRepository.GetByIdAsync(id);
+
             if (car != null)
             {
                 Car = car;
-                carRepository.Remove(Car);
+                await carRepository.RemoveAsync(Car);
             }
 
             return RedirectToPage("./Index");
