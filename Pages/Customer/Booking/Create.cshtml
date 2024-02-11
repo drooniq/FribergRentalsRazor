@@ -12,14 +12,15 @@
 
     <h3>You wish to book this car: </h3>
     @Html.DisplayFor(model => model.Booking.Car.Brand) @Html.DisplayFor(model => model.Booking.Car.Model)
+    <p><img src="@Model.Booking.Car.ImageUrls[0]" alt="Car image" width="200" height=auto /></p>
 
-    @if (Model.Booking.Car.ImageUrls != null)
+@*     @if (Model.Booking.Car.ImageUrls != null)
     {
         @foreach (var imageUrl in Model.Booking.Car.ImageUrls.First())
         {
             <p><img src="@imageUrl" alt="Car image" width="200" height=auto /></p>
         }
-    }
+    } *@
 
     @if (ModelState.ErrorCount > 0)
     {

@@ -5,112 +5,114 @@
 
 <partial name="_authCustomer" />
 
-<h1>Listing all my Bookings</h1>
-<hr />
-@if (Model.Bookings.Count == 0)
-{
-    <tr>
-        <td colspan="4">No bookings found</td>
-    </tr>
-}
-else
-{
-<h2 style="margin-top: 10px">Future bookings</h2>
-<table class="table">
-    <thead>
+<div class="panel neutral">
+    <h1>Listing all my Bookings</h1>
+    <hr />
+    @if (Model.Bookings.Count == 0)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].Car.Brand) - @Html.DisplayNameFor(model => model.Bookings[0].Car.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].Car)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].RentalStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
-            </th>
-            <th>
-                Actions
-            </th>
+            <td colspan="4">No bookings found</td>
         </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate > DateTime.Now))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Car.Brand) - @Html.DisplayFor(modelItem => item.Car.Model)
+    }
+    else
+    {
+        <h2 style="margin-top: 10px">Future bookings</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].Customer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].Car.Brand) - @Html.DisplayNameFor(model => model.Bookings[0].Car.Model)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].Car)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].RentalStartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate > DateTime.Now))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Car.Brand) - @Html.DisplayFor(modelItem => item.Car.Model)
 
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" width="100px" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RentalStartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RentalReturnDate)
-                </td>
-                <td>
-                    <a class="btn error" asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        </td>
+                        <td>
+                            <img src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" width="100px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RentalStartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RentalReturnDate)
+                        </td>
+                        <td>
+                            <a class="btn error" asp-page="./Delete" asp-route-id="@item.BookingId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<h2 style="margin-top: 10px">Old or Ongoing bookings.</h2>
-<hr />
-<table>
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].Customer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].Car.Brand) - @Html.DisplayNameFor(model => model.Bookings[0].Car.Model)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].Car)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].RentalStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate <= DateTime.Now))
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Car.Brand) - @Html.DisplayFor(modelItem => item.Car.Model)
+        <h2 style="margin-top: 10px">Old or Ongoing bookings.</h2>
+        <hr />
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].Customer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].Car.Brand) - @Html.DisplayNameFor(model => model.Bookings[0].Car.Model)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].Car)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].RentalStartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Bookings[0].RentalReturnDate)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Bookings.Where(b => b.RentalStartDate <= DateTime.Now))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Car.Brand) - @Html.DisplayFor(modelItem => item.Car.Model)
 
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" width="100px" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RentalStartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RentalReturnDate)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-}
+                        </td>
+                        <td>
+                            <img src="@Html.DisplayFor(modelItem => item.Car.ImageUrls[0])" width="100px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RentalStartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RentalReturnDate)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
