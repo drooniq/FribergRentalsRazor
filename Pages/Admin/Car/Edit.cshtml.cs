@@ -31,6 +31,7 @@ namespace FribergRentalsRazor.Pages.Admin.Car
             }
 
             var car =  await carRepository.GetByIdAsync(id);
+
             if (car == null)
             {
                 return NotFound();
