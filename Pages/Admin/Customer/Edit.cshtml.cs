@@ -31,6 +31,7 @@ namespace FribergRentalsRazor.Pages.Admin.Customer
             }
 
             var customer =  await customerRepository.GetByIdAsync(id);
+
             if (customer == null)
             {
                 return NotFound();

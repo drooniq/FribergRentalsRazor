@@ -25,7 +25,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Customer.Password" class="control-label"></label>
-                    <input asp-for="Customer.Password" class="form-size" />
+                    <input asp-for="Customer.Password" class="form-size" value="@Model.Customer.Password" />
                 </div>
                 <div class="form-group">
                     <label asp-for="Customer.FullName" class="control-label"></label>
@@ -62,5 +62,4 @@
             </form>
         </div>
     </div>
-
 </div>
